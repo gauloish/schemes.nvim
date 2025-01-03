@@ -107,7 +107,7 @@ M.selector = function()
 
 	local keys = {}
 
-	for key, scheme in pairs(M.schemes) do
+	for _, key in pairs(M.keys) do
 		table.insert(keys, key)
 	end
 
@@ -155,19 +155,15 @@ M.setup = function(options)
 	M.after = options.after or function(_) end
 	M.default = options.default
 	M.schemes = {}
+	M.keys = {}
 
 	for _, scheme in pairs(options.schemes) do
 		local key = M.format(scheme.name, scheme.background)
-
 		M.schemes[key] = scheme
+		table.insert(M.keys, key)
 	end
 
-	table.sort(M.schemes, function(a, b)
-		local key_a = M.format(a.name, a.background)
-		local key_b = M.format(b.name, b.background)
-
-		return key_a < key_b
-	end)
+	table.sort(M.keys)
 
 	vim.api.nvim_create_user_command("Schemes", function()
 		M.selector():find()
