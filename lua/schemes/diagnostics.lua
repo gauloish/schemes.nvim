@@ -2,29 +2,28 @@ local M = {}
 
 local text = "[schemes.nvim] %s in function %s: %s\n"
 
---- Report an error
----@param source Function where error holds
----@param message Error message
-M.report_error = function(source, message)
-	if type(source) ~= "string" then
-		M.report_error("diagnostics.report_error(source, message)", "\"source\" argument must be a \"string\"")
-	elseif type(message) ~= "string" then
-		M.report_error("diagnostics.report_error(source, message)", "\"message\" argument must be a \"string\"")
-	else
-		vim.api.nvim_echo({{text:format("Error", source, message), "ErrorMsg"}}, true, {})
-	end
+M.ERROR = "Error"
+M.WARNING = "Warning"
+
+--- Create a diagnostic message
+---@param message Diagnostic text
+---@param code Diagnostic type
+---@return Diagnostic
+M.create = function(text, code)
+	return {
+		text = text,
+		code = code,
+	}
 end
 
---- Report a warning
----@param source Function where warning holds
----@param message Warning message
-M.report_warning = function(source, message)
-	if type(source) ~= "string" then
-		M.report_error("diagnostics.report_warning(source, message)", "\"source\" argument must be a \"string\"")
-	elseif type(message) ~= "string" then
-		M.report_error("diagnostics.report_warning(source, message)", "\"message\" argument must be a \"string\"")
-	else
-		vim.api.nvim_echo({{text:format("Warning", source, message), "WarnMsg"}}, true, {})
+--- Report an diagnostic message
+---@param source Function where diagnostic is reported
+---@param message Diagnostic message
+M.report = function(source, message)
+	if message.code == M.ERROR then
+		vim.api.nvim_echo({{text:format(M.ERROR, source, message.text), "ErrorMsg"}}, true, {})
+	elseif message.code == M.WARNING then
+		vim.api.nvim_echo({{text:format(M.WARNING, source, message.text), "ErrorMsg"}}, true, {})
 	end
 end
 
