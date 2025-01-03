@@ -12,7 +12,7 @@ M.parse_options = function(options)
 
 	-- Parse options type
 	if type(options) ~= "table" then
-		messages:insert(diagnostics.create(
+		table.insert(messages, diagnostics.create(
 			"options must be a \"table\"",
 			diagnostics.ERROR
 		))
@@ -20,7 +20,7 @@ M.parse_options = function(options)
 		-- Parse options.before type
 		if options.before then
 			if type(options.before) ~= "function" then
-				messages:insert(diagnostics.create(
+				table.insert(messages, diagnostics.create(
 					"options.before must be \"nil\" or a \"function\"",
 					diagnostics.ERROR
 				))
@@ -28,7 +28,7 @@ M.parse_options = function(options)
 				result.before = options.before
 			end
 		else
-			messages:insert(diagnostics.create(
+			table.insert(messages, diagnostics.create(
 				"options.before is \"nil\"",
 				diagnostics.WARNING
 			))
@@ -37,7 +37,7 @@ M.parse_options = function(options)
 		-- Parse options.after type
 		if options.after then
 			if type(options.after) ~= "function" then
-				messages:insert(diagnostics.create(
+				table.insert(messages, diagnostics.create(
 					"options.after must be \"nil\" or a \"function\"",
 					diagnostics.ERROR
 				))
@@ -45,7 +45,7 @@ M.parse_options = function(options)
 				result.after = options.after
 			end
 		else
-			messages:insert(diagnostics.create(
+			table.insert(messages, diagnostics.create(
 				"options.before is \"nil\"",
 				diagnostics.WARNING
 			))
@@ -57,7 +57,7 @@ M.parse_options = function(options)
 
 			-- Parse options.default type
 			if type(options.default) ~= "table" then
-				messages:insert(diagnostics.create(
+				table.insert(messages, diagnostics.create(
 					"options.default must be a \"table\"",
 					diagnostics.ERROR
 				))
@@ -65,7 +65,7 @@ M.parse_options = function(options)
 			else
 				-- Parse options.default.name type
 				if type(options.default.name) ~= "string" then
-					messages:insert(diagnostics.create(
+					table.insert(messages, diagnostics.create(
 						"options.default.name must be a \"string\"",
 						diagnostics.ERROR
 					))
@@ -74,7 +74,7 @@ M.parse_options = function(options)
 
 				-- Parse options.default.background type
 				if type(options.default.background) ~= "string" then
-					messages:insert(diagnostics.create(
+					table.insert(messages, diagnostics.create(
 						"options.default.background must be a \"string\"",
 						diagnostics.ERROR
 					))
@@ -82,7 +82,7 @@ M.parse_options = function(options)
 				else
 					-- Parse options.default.background value
 					if options.default.background ~= "dark" and options.default.background ~= "light" then
-						messages:insert(diagnostics.create(
+						table.insert(messages, diagnostics.create(
 							"options.default.background value must be \"dark\" or \"light\"",
 							diagnostics.WARNING
 						))
@@ -92,7 +92,7 @@ M.parse_options = function(options)
 
 				-- Parse options.default.command value
 				if type(options.default.command) ~= "function" then
-					messages:insert(diagnostics.create(
+					table.insert(messages, diagnostics.create(
 						"options.default.command must be a \"function\"",
 						diagnostics.ERROR
 					))
@@ -104,7 +104,7 @@ M.parse_options = function(options)
 				result.default = options.default
 			end
 		else
-			messages:insert(diagnostics.create(
+			table.insert(messages, diagnostics.create(
 				"options.default is \"nil\"",
 				diagnostics.WARNING
 			))
@@ -121,7 +121,7 @@ M.parse_options = function(options)
 
 					-- Parse options.schemes[key] type
 					if type(scheme) ~= "table" then
-						messages:insert(diagnostics.create(
+						table.insert(messages, diagnostics.create(
 							"options.schemes[%s] must be a \"table\"",
 							diagnostics.ERROR
 						))
@@ -129,7 +129,7 @@ M.parse_options = function(options)
 					else
 						-- Parse options.schemes[key].name type
 						if type(scheme.name) ~= "string" then
-							messages:insert(diagnostics.create(
+							table.insert(messages, diagnostics.create(
 								("options.schemes[%s].name must be a \"string\""):format(key),
 								diagnostics.ERROR
 							))
@@ -138,7 +138,7 @@ M.parse_options = function(options)
 
 						-- Parse options.schemes[key].background type
 						if type(scheme.background) ~= "string" then
-							messages:insert(diagnostics.create(
+							table.insert(messages, diagnostics.create(
 								("options.schemes[%s].background must be a \"string\""):format(key),
 								diagnostics.ERROR
 							))
@@ -146,7 +146,7 @@ M.parse_options = function(options)
 						else
 							-- Parse options.schemes[key].background value
 							if scheme.background ~= "dark" and scheme.background ~= "light" then
-								messages:insert(diagnostics.create(
+								table.insert(messages, diagnostics.create(
 									("options.schemes[%s].background value must be \"dark\" or \"light\""):format(key),
 									diagnostics.WARNING
 								))
@@ -156,7 +156,7 @@ M.parse_options = function(options)
 
 						-- Parse options.schemes[key].command value
 						if type(scheme.command) ~= "function" then
-							messages:insert(diagnostics.create(
+							table.insert(messages, diagnostics.create(
 								("options.schemes[%s].command must be a \"function\""):format(key),
 								diagnostics.ERROR
 							))
@@ -169,13 +169,13 @@ M.parse_options = function(options)
 					end
 				end
 			else
-				messages:insert(diagnostics.create(
+				table.insert(messages, diagnostics.create(
 					"options.schemes must be a \"table\"",
 					diagnostics.ERROR
 				))
 			end
 		else
-			messages:insert(diagnostics.create(
+			table.insert(messages, diagnostics.create(
 				"options.schemes is \"nil\"",
 				diagnostics.WARNING
 			))

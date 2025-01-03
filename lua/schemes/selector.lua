@@ -108,7 +108,7 @@ M.selector = function()
 	local keys = {}
 
 	for key, scheme in pairs(M.schemes) do
-		keys:insert(key)
+		table.insert(keys, key)
 	end
 
 	local state = require("telescope.actions.state")
