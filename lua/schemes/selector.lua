@@ -76,9 +76,11 @@ M.save = function(key)
 
 			file:close()
 		end
-	else
+	elseif M.default then
 		pcall(os.remove, FILE)
 		M.change(M.default)
+	else
+		-- ...
 	end
 end
 
