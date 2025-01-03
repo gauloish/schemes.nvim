@@ -65,7 +65,7 @@ end
 ---@param key Scheme key
 M.save = function(key)
 	if key and M.schemes[key] then
-		local file = io.open(FILE, "w")
+		local file = io.open(M.FILE, "w")
 
 		if file then
 			if M.change(M.schemes[key]) then
@@ -77,7 +77,7 @@ M.save = function(key)
 			file:close()
 		end
 	elseif M.default then
-		pcall(os.remove, FILE)
+		pcall(os.remove, M.FILE)
 		M.change(M.default)
 	else
 		-- ...
@@ -86,7 +86,7 @@ end
 
 --- initialize scheme
 M.initialize = function()
-	local file = io.open(FILE, "r")
+	local file = io.open(M.FILE, "r")
 	local key = nil
 
 	if file then
