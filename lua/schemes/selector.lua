@@ -11,7 +11,7 @@ M.current = nil
 ---@param background Background scheme
 ---@return Formatted string with name and background scheme
 M.format = function(name, background)
-	return ("%s: %s"):format(name, background:gsub("^%l", string.upper))
+	return ("%s: %s"):format(background:gsub("^%l", string.upper), name)
 end
 
 --- Change current scheme
