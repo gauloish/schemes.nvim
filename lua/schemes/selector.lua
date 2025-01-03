@@ -162,7 +162,12 @@ M.setup = function(options)
 		M.schemes[key] = scheme
 	end
 
-	table.sort(M.schemes)
+	table.sort(M.schemes, function(a, b)
+		local key_a = M.format(a.name, a.background)
+		local key_b = M.format(b.name, b.background)
+
+		return key_a < key_b
+	end)
 
 	vim.api.nvim_create_user_command("Schemes", function()
 		M.selector():find()
