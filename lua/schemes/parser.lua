@@ -31,9 +31,10 @@ M.parse_options = function(options)
 			local ok = true
 
 			-- Parse options.default type
-			if type(options.default) == "string" then
-			elseif type(options.default) == "function" then
-			elseif type(options.default) == "table" then
+			if type(options.default) ~= "table" then
+				messages:insert("options.default must be either a \"table\"")
+				ok = false
+			else
 				-- Parse options.default.name type
 				if type(options.default.name) ~= "string" then
 					messages:insert("options.default.name must be a \"string\"")
@@ -57,9 +58,6 @@ M.parse_options = function(options)
 					messages:insert("options.default.command must be a \"function\"")
 					ok = false
 				end
-			else
-				messages:insert("options.default must be either a \"string\", a \"function\", or a \"table\"")
-				ok = false
 			end
 
 			if ok then
@@ -77,9 +75,10 @@ M.parse_options = function(options)
 					local ok = true
 
 					-- Parse options.schemes[key] type
-					if type(scheme) == "string" then
-					elseif type(scheme) == "function" then
-					elseif type(scheme) == "table" then
+					if type(scheme) ~= "table" then
+						messages:insert("options.schemes[%s] must be either a \"table\"")
+						ok = false
+					else
 						-- Parse options.schemes[key].name type
 						if type(scheme.name) ~= "string" then
 							messages:insert(("options.schemes[%s].name must be a \"string\""):format(key))
@@ -103,9 +102,6 @@ M.parse_options = function(options)
 							messages:insert(("options.schemes[%s].command must be a \"function\""):format(key))
 							ok = false
 						end
-					else
-						messages:insert("options.schemes[%s] must be either a \"string\", a \"function\", or a \"table\"")
-						ok = false
 					end
 
 					if ok then
