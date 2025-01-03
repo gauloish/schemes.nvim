@@ -182,8 +182,10 @@ M.parse_options = function(options)
 		end
 	end
 
+	options = result
+
 	return {
 		messages = messages,
-		result = result,
+		options = options,
 	}
 end
