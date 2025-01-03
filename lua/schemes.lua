@@ -1,5 +1,5 @@
 local parser = require("schemes.parser")
-local selector = require("schemes.diagnostics")
+local selector = require("schemes.selector")
 local diagnostics = require("schemes.diagnostics")
 
 local M = {}
