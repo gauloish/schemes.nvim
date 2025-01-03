@@ -25,13 +25,37 @@ M.change = function(scheme)
 	end
 
 	if M.current then
-		pcall(M.before, M.current)
+		if not pcall(M.before, M.current) then
+			diagnostics.report(
+				diagnostics.create(
+					"before(scheme)",
+					"an error occurs during execution of funtion 'before'"
+				),
+				diagnostics.WARNING
+			)
+		end
 	end
 
 	local ok = pcall(scheme.command)
 
 	if ok then
-		pcall(M.after, scheme)
+		if not pcall(M.after, scheme) then
+			diagnostics.report(
+				diagnostics.create(
+					"after(scheme)",
+					"an error occurs during execution of funtion 'after'"
+				),
+				diagnostics.WARNING
+			)
+		end
+	else
+		diagnostics.report(
+			diagnostics.create(
+				"command()",
+				"an error occurs during execution of funtion 'command'"
+			),
+			diagnostics.ERROR
+		)
 	end
 
 	return ok
@@ -46,6 +70,8 @@ M.save = function(key)
 		if file then
 			if M.change(M.schemes[key]) then
 				file:write(key)
+
+				vim.print("Scheme: " .. M.schemes[key].name)
 			end
 
 			file:close()
