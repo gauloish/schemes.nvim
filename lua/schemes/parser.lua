@@ -116,13 +116,13 @@ M.parse_options = function(options)
 				result.schemes = {}
 
 				-- Parse each given scheme
-				for key, scheme in pairs(options) do
+				for key, scheme in pairs(options.schemes) do
 					local ok = true
 
 					-- Parse options.schemes[key] type
 					if type(scheme) ~= "table" then
 						table.insert(messages, diagnostics.create(
-							"options.schemes[%s] must be a \"table\"",
+							("options.schemes[%s] must be a \"table\""):format(key),
 							diagnostics.ERROR
 						))
 						ok = false
