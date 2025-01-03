@@ -170,7 +170,7 @@ M.parse_options = function(options)
 				end
 			else
 				messages:insert(diagnostics.create(
-					"options.schemes must be a \"table\""),
+					"options.schemes must be a \"table\"",
 					diagnostics.ERROR
 				))
 			end
