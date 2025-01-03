@@ -17,7 +17,7 @@ M.setup = function(options)
 		diagnostics.report("setup(options)", message)
 	end
 
-	selector.setup(option)
+	selector.setup(options)
 end
 
 return M
