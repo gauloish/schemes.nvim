@@ -189,3 +189,5 @@ M.parse_options = function(options)
 		options = options,
 	}
 end
+
+return M
