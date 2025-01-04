@@ -67,6 +67,6 @@ nnoremap <leader>fs <cmd>Schemes<cr>
 Using Lua:
 
 ```lua
--- Keymap in VimL to call :Schemes command
+-- Keymap in Lua to call :Schemes command
 vim.keymap.set("n", "<leader>fs", ":Schemes", { silent = true, desc = "Telescope picker for colorschemes" })
 ```
