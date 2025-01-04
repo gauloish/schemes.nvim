@@ -13,6 +13,10 @@ M.setup = function(options)
 	messages = result.messages
 	options = result.options
 
+	table.sort(messages, function(a, b)
+		return a.code < b.code
+	end)
+
 	for _, message in pairs(messages) do
 		diagnostics.report("setup(options)", message)
 	end
