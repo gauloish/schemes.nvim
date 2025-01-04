@@ -26,12 +26,11 @@ M.change = function(scheme)
 
 	if M.current then
 		if not pcall(M.before, M.current) then
-			diagnostics.report(
+			diagnostics.report("before(scheme)",
 				diagnostics.create(
-					"before(scheme)",
-					"an error occurs during execution of funtion 'before'"
-				),
-				diagnostics.WARNING
+					"an error occurs during execution of funtion 'before'",
+					diagnostics.WARNING
+				)
 			)
 		end
 	end
@@ -40,23 +39,21 @@ M.change = function(scheme)
 
 	if ok then
 		if not pcall(M.after, scheme) then
-			diagnostics.report(
+			diagnostics.report("after(scheme)",
 				diagnostics.create(
-					"after(scheme)",
-					"an error occurs during execution of funtion 'after'"
-				),
-				diagnostics.WARNING
+					"an error occurs during execution of funtion 'after'",
+					diagnostics.WARNING
+				)
 			)
 		end
 
 		M.current = scheme
 	else
-		diagnostics.report(
+		diagnostics.report("command()",
 			diagnostics.create(
-				"command()",
-				"an error occurs during execution of funtion 'command'"
-			),
-			diagnostics.ERROR
+				"an error occurs during execution of funtion 'command'",
+				diagnostics.ERROR
+			)
 		)
 	end
 
