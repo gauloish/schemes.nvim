@@ -23,7 +23,7 @@ M.report = function(source, message)
 	if message.code == M.ERROR then
 		vim.api.nvim_echo({{text:format(M.ERROR, source, message.text), "ErrorMsg"}}, true, {})
 	elseif message.code == M.WARNING then
-		vim.api.nvim_echo({{text:format(M.WARNING, source, message.text), "WarnMsg"}}, true, {})
+		vim.api.nvim_echo({{text:format(M.WARNING, source, message.text), "WarningMsg"}}, true, {})
 	end
 end
 
