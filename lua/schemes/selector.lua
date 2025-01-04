@@ -48,6 +48,8 @@ M.change = function(scheme)
 				diagnostics.WARNING
 			)
 		end
+
+		M.current = scheme
 	else
 		diagnostics.report(
 			diagnostics.create(
